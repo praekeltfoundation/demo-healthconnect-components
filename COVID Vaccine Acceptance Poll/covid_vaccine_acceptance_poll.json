@@ -1,0 +1,1732 @@
+{
+  "version": "13",
+  "site": "https://textit.com",
+  "flows": [
+    {
+      "name": "Vaccine Acceptance Poll",
+      "uuid": "a73a256e-ba33-4b68-ac33-c5a260a591a9",
+      "spec_version": "13.1.0",
+      "language": "eng",
+      "type": "messaging",
+      "nodes": [
+        {
+          "uuid": "8127bb8f-1745-45c3-84bc-8f6ed8610da9",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "\ud83d\udc4b\ud83c\udffd  Thank you for taking the time to join our survey.\n\nYour attitudes and opinions about getting vaccinated against COVID-19 matter to us.\n\nPlease tell us:\n*Will you be getting vaccinated when it's your turn?*",
+              "type": "send_msg",
+              "quick_replies": [
+                "Yes",
+                "Not sure",
+                "No",
+                "I'm already vaccinated"
+              ],
+              "uuid": "c5a86df6-06c9-4f85-a033-25c95f06471b"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "2050a472-5a38-4e5d-8638-c5b8b5e6fb31",
+              "destination_uuid": "c6d11b48-58e3-4df4-bd6f-595802bed413"
+            }
+          ]
+        },
+        {
+          "uuid": "8157e277-3e3b-4432-9fea-659e2b8b4ae1",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "\u26a0\ufe0f This service works best when you use the buttons at the bottom of the message\n\nPlease tell us: \n*When a Covid-19 vaccine becomes available to you, will you take it?*",
+              "type": "send_msg",
+              "quick_replies": [
+                "Yes",
+                "Not sure",
+                "No",
+                "I'm already vaccinated"
+              ],
+              "uuid": "4d283b72-c183-43d9-9d4c-a328cf5f01f5"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "16aa538a-3eb0-46d1-82d9-6c0d7bae4c7c",
+              "destination_uuid": "c6d11b48-58e3-4df4-bd6f-595802bed413"
+            }
+          ]
+        },
+        {
+          "uuid": "c6d11b48-58e3-4df4-bd6f-595802bed413",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "35b87a08-8ddc-4818-bd72-a0a2c2827b29",
+            "cases": [
+              {
+                "arguments": [
+                  "yes"
+                ],
+                "type": "has_any_word",
+                "uuid": "ee2e9750-014b-461e-bee5-d62580dca1e7",
+                "category_uuid": "d29c5b46-fcf8-4fe7-abea-00125f1c4aad"
+              },
+              {
+                "arguments": [
+                  "not sure"
+                ],
+                "type": "has_all_words",
+                "uuid": "2a25bcbe-5b72-4348-b193-3d4b37fec263",
+                "category_uuid": "06c909e2-c150-46a0-ad6a-67b879a82b92"
+              },
+              {
+                "arguments": [
+                  "no"
+                ],
+                "type": "has_any_word",
+                "uuid": "239222c5-e980-4aff-af75-61af0fa80b97",
+                "category_uuid": "992abd25-e9e2-44b8-8815-159b77a9121b"
+              },
+              {
+                "arguments": [
+                  "i'm already vaccinated"
+                ],
+                "type": "has_all_words",
+                "uuid": "ed279707-8d63-41e1-90cb-252b20e60d33",
+                "category_uuid": "aae50d05-4fae-4921-a37f-de109abad942"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "d29c5b46-fcf8-4fe7-abea-00125f1c4aad",
+                "name": "Yes",
+                "exit_uuid": "f57ffbac-6781-479d-921c-32ac0b9614d4"
+              },
+              {
+                "uuid": "06c909e2-c150-46a0-ad6a-67b879a82b92",
+                "name": "Not sure",
+                "exit_uuid": "9988864e-f3a3-407b-bd57-a6e833882d57"
+              },
+              {
+                "uuid": "992abd25-e9e2-44b8-8815-159b77a9121b",
+                "name": "No",
+                "exit_uuid": "2633d6e4-e59f-4313-aea1-dc982fa5e8a4"
+              },
+              {
+                "uuid": "aae50d05-4fae-4921-a37f-de109abad942",
+                "name": "Already vaccinated",
+                "exit_uuid": "bd08392e-dbe8-4ba4-8510-3140ae8cf66a"
+              },
+              {
+                "uuid": "35b87a08-8ddc-4818-bd72-a0a2c2827b29",
+                "name": "Other",
+                "exit_uuid": "629c920d-bf3b-42f2-b165-2e01df88357e"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Vaccine willingness"
+          },
+          "exits": [
+            {
+              "uuid": "f57ffbac-6781-479d-921c-32ac0b9614d4",
+              "destination_uuid": "29eb90ca-3b4b-4006-a15b-5080d177394f"
+            },
+            {
+              "uuid": "9988864e-f3a3-407b-bd57-a6e833882d57",
+              "destination_uuid": "98d904a1-1e92-4500-8e67-1b2a12054e5f"
+            },
+            {
+              "uuid": "2633d6e4-e59f-4313-aea1-dc982fa5e8a4",
+              "destination_uuid": "98d904a1-1e92-4500-8e67-1b2a12054e5f"
+            },
+            {
+              "uuid": "bd08392e-dbe8-4ba4-8510-3140ae8cf66a",
+              "destination_uuid": "132e1f36-cad9-4e25-9bed-eeb24b00c594"
+            },
+            {
+              "uuid": "629c920d-bf3b-42f2-b165-2e01df88357e",
+              "destination_uuid": "8157e277-3e3b-4432-9fea-659e2b8b4ae1"
+            }
+          ]
+        },
+        {
+          "uuid": "29eb90ca-3b4b-4006-a15b-5080d177394f",
+          "actions": [
+            {
+              "uuid": "00f9c4bc-71f8-48b7-8c30-f2796ac0857d",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Vaccine Willingness",
+                "key": "vaccine_willingness"
+              },
+              "value": "@results.vaccine_willingness.category"
+            },
+            {
+              "attachments": [],
+              "text": "What was the *main* reason for your decision to get vaccinated?",
+              "type": "send_msg",
+              "quick_replies": [
+                "For protection",
+                "For work",
+                "For travel",
+                "Other"
+              ],
+              "uuid": "c96713f7-f2fd-4616-b033-cecf1bdc8523"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "cb2023ce-b2f0-401f-818c-21af8c612b93",
+              "destination_uuid": "77354de2-9dac-4513-858b-ebbd68bf78e3"
+            }
+          ]
+        },
+        {
+          "uuid": "132e1f36-cad9-4e25-9bed-eeb24b00c594",
+          "actions": [
+            {
+              "uuid": "083e46ec-9f09-4129-9f79-5769e523a71a",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Self reported vaccinated",
+                "key": "self_reported_vaccinated"
+              },
+              "value": "Yes"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "0117e637-0357-44a4-a182-ee84e28f569e",
+              "destination_uuid": "29eb90ca-3b4b-4006-a15b-5080d177394f"
+            }
+          ]
+        },
+        {
+          "uuid": "98d904a1-1e92-4500-8e67-1b2a12054e5f",
+          "actions": [
+            {
+              "uuid": "0bc352cf-95a2-4325-98e5-6dcc69ec7747",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Vaccine Willingness",
+                "key": "vaccine_willingness"
+              },
+              "value": "@results.vaccine_willingness.category"
+            },
+            {
+              "attachments": [],
+              "text": "Thank you for letting us know. Can you share the *main reason* why you feel this way about COVID-19 vaccines?",
+              "type": "send_msg",
+              "quick_replies": [
+                " I don't think the vaccines are safe",
+                "I don't think the vaccines work",
+                "Worried about side effects",
+                "Religious reasons",
+                "Transport/costs/time",
+                "Other"
+              ],
+              "uuid": "646d1a56-1522-4901-95ab-1990a6941466"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "fbcff661-44d9-4e65-99be-e0fb983f30ce",
+              "destination_uuid": "3563fd16-208c-45bc-ae43-cd6f6b4ae1a6"
+            }
+          ]
+        },
+        {
+          "uuid": "34a0a302-6b95-405d-8139-4c79eb8e2d5d",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "\u26a0\ufe0f This service works best when you use the buttons at the bottom of the message\n\nPlease tell us: \nWhat was the *main* reason for your decision to get vaccinated?",
+              "type": "send_msg",
+              "quick_replies": [
+                "For protection",
+                "For work",
+                "For travel",
+                "Other"
+              ],
+              "uuid": "86ac6cd4-6a6e-4e1f-aacd-0887d1fd0436"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "a2e7e6eb-4e38-44fd-8fdb-073dc24f64a3",
+              "destination_uuid": "77354de2-9dac-4513-858b-ebbd68bf78e3"
+            }
+          ]
+        },
+        {
+          "uuid": "77354de2-9dac-4513-858b-ebbd68bf78e3",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "df968e29-3084-432d-a1a3-8fade37b8a60",
+            "cases": [
+              {
+                "arguments": [
+                  "For protection"
+                ],
+                "type": "has_all_words",
+                "uuid": "3aafa29d-a49a-47bd-92c6-1a8a02ac6356",
+                "category_uuid": "ff0606eb-912c-4024-acd1-e564ee1333fe"
+              },
+              {
+                "arguments": [
+                  "For work"
+                ],
+                "type": "has_all_words",
+                "uuid": "d88bfe30-1716-4dcf-a6c7-b20750d4dcc8",
+                "category_uuid": "c1e21d35-abf2-49d8-ae0d-2efad853b4a7"
+              },
+              {
+                "arguments": [
+                  "For travel"
+                ],
+                "type": "has_all_words",
+                "uuid": "040c17af-c6cc-4d96-bb19-b4d0bfec576f",
+                "category_uuid": "f62af274-99ad-406b-affc-3d8b06380378"
+              },
+              {
+                "arguments": [
+                  "Other"
+                ],
+                "type": "has_all_words",
+                "uuid": "d7f636fc-f2fa-4718-be8d-906ab29d1368",
+                "category_uuid": "0ec01856-470c-4651-8abb-7492a978df3d"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "ff0606eb-912c-4024-acd1-e564ee1333fe",
+                "name": "Protection",
+                "exit_uuid": "ac94e2a3-5a59-4f9c-a47d-a00aad4b1777"
+              },
+              {
+                "uuid": "c1e21d35-abf2-49d8-ae0d-2efad853b4a7",
+                "name": "Work",
+                "exit_uuid": "80e9b07c-32df-491c-b11c-0a3258cd1fae"
+              },
+              {
+                "uuid": "f62af274-99ad-406b-affc-3d8b06380378",
+                "name": "Travel",
+                "exit_uuid": "d88d14ce-5ec2-4d69-abf9-e10f20420ab7"
+              },
+              {
+                "uuid": "0ec01856-470c-4651-8abb-7492a978df3d",
+                "name": "Alternative",
+                "exit_uuid": "00277bfe-7831-484a-8213-3f02c62cb648"
+              },
+              {
+                "uuid": "df968e29-3084-432d-a1a3-8fade37b8a60",
+                "name": "Other",
+                "exit_uuid": "e66408b9-c1b1-4b21-810f-d350d35a420b"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Vaccine motivation"
+          },
+          "exits": [
+            {
+              "uuid": "ac94e2a3-5a59-4f9c-a47d-a00aad4b1777",
+              "destination_uuid": "5167fcb8-4052-493c-946b-2b6407b2222b"
+            },
+            {
+              "uuid": "80e9b07c-32df-491c-b11c-0a3258cd1fae",
+              "destination_uuid": "5167fcb8-4052-493c-946b-2b6407b2222b"
+            },
+            {
+              "uuid": "d88d14ce-5ec2-4d69-abf9-e10f20420ab7",
+              "destination_uuid": "5167fcb8-4052-493c-946b-2b6407b2222b"
+            },
+            {
+              "uuid": "00277bfe-7831-484a-8213-3f02c62cb648",
+              "destination_uuid": "5167fcb8-4052-493c-946b-2b6407b2222b"
+            },
+            {
+              "uuid": "e66408b9-c1b1-4b21-810f-d350d35a420b",
+              "destination_uuid": "34a0a302-6b95-405d-8139-4c79eb8e2d5d"
+            }
+          ]
+        },
+        {
+          "uuid": "5167fcb8-4052-493c-946b-2b6407b2222b",
+          "actions": [
+            {
+              "uuid": "176569f0-ddc6-48c2-b074-b296d68dfaa6",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Vaccine motivation",
+                "key": "vaccine_motivation"
+              },
+              "value": "@results.vaccine_motivation.category"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "7c09989d-c919-4eef-8e86-465af2ef2b89",
+              "destination_uuid": "0cd9dd0a-d578-42e5-af50-9d7a25a14f4c"
+            }
+          ]
+        },
+        {
+          "uuid": "0cd9dd0a-d578-42e5-af50-9d7a25a14f4c",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "1e9fb706-430d-476f-8b66-8ed91202fe32",
+            "cases": [
+              {
+                "arguments": [
+                  "yes"
+                ],
+                "type": "has_any_word",
+                "uuid": "d09a0ca8-269f-4ba9-9099-80ae70234bf2",
+                "category_uuid": "60eacd1d-ddaa-49cb-a497-f6c0d8d5fbb6"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "60eacd1d-ddaa-49cb-a497-f6c0d8d5fbb6",
+                "name": "Yes",
+                "exit_uuid": "a45b79a1-2462-4171-b452-d6983c845cb1"
+              },
+              {
+                "uuid": "1e9fb706-430d-476f-8b66-8ed91202fe32",
+                "name": "Other",
+                "exit_uuid": "6e57a606-732e-41c1-9ae4-103111e1ea11"
+              }
+            ],
+            "operand": "@fields.self_reported_vaccinated"
+          },
+          "exits": [
+            {
+              "uuid": "a45b79a1-2462-4171-b452-d6983c845cb1",
+              "destination_uuid": "92501eaf-8121-455c-bae1-af816d78fb01"
+            },
+            {
+              "uuid": "6e57a606-732e-41c1-9ae4-103111e1ea11",
+              "destination_uuid": "f0f02674-908b-40f2-af4e-5eaa897eca3a"
+            }
+          ]
+        },
+        {
+          "uuid": "92501eaf-8121-455c-bae1-af816d78fb01",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "Thank you for letting us know\n\nBased on your experience, would you encourage others to get vaccinated?",
+              "type": "send_msg",
+              "quick_replies": [
+                "Yes",
+                "Maybe",
+                "No"
+              ],
+              "uuid": "cf7f0f39-df9d-4488-a00f-289e16f2a23d"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "eaba0309-a5ce-4295-847f-c2a6bd0a8397",
+              "destination_uuid": "b6b56b1e-ed19-410a-9cbd-1a0bdbbebbc6"
+            }
+          ]
+        },
+        {
+          "uuid": "15f02477-85b2-43c1-a9ab-097578e7e882",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "\u26a0\ufe0f This service works best when you use the buttons at the bottom of the message\n\nBased on your experience, would you encourage others to get vaccinated?",
+              "type": "send_msg",
+              "quick_replies": [
+                "Yes",
+                "Maybe",
+                "No"
+              ],
+              "uuid": "3005817d-4eb7-4a31-ad0b-bf7d6ec3fc29"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "60666008-802a-4b17-b036-b39e056d9ec1",
+              "destination_uuid": "b6b56b1e-ed19-410a-9cbd-1a0bdbbebbc6"
+            }
+          ]
+        },
+        {
+          "uuid": "3563fd16-208c-45bc-ae43-cd6f6b4ae1a6",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "eae81047-797c-4e0e-85c1-5cc3c39dd2b1",
+            "cases": [
+              {
+                "arguments": [
+                  "I don't think the vaccines are safe"
+                ],
+                "type": "has_all_words",
+                "uuid": "eb8c592f-9ea7-4d53-9e67-49ee3d957ce6",
+                "category_uuid": "80b4ccd5-ac57-4518-916f-afbbe9221e67"
+              },
+              {
+                "arguments": [
+                  "I don't think the vaccines work"
+                ],
+                "type": "has_all_words",
+                "uuid": "ef03f633-8d4f-4b61-9c89-d0ffc4a0d8a9",
+                "category_uuid": "5b9ae6a8-98c8-43a8-8d24-12070268bd25"
+              },
+              {
+                "arguments": [
+                  "Worried about side effects"
+                ],
+                "type": "has_all_words",
+                "uuid": "3ca1dfa6-9468-49b9-b301-f919cd0a4ae7",
+                "category_uuid": "476c33fd-37c8-4d96-a4e0-81b3c31ff5c9"
+              },
+              {
+                "arguments": [
+                  "Religious reasons"
+                ],
+                "type": "has_all_words",
+                "uuid": "3275ebb0-9c8f-4878-918b-ee3a553f8c4f",
+                "category_uuid": "10ace8c6-6623-48a1-a87f-7809115d09d9"
+              },
+              {
+                "arguments": [
+                  "Transport/costs/time"
+                ],
+                "type": "has_all_words",
+                "uuid": "8d6d2a73-1e24-403b-9025-0f2f3d10954a",
+                "category_uuid": "92d31b31-873d-4eaf-a126-d7e584453541"
+              },
+              {
+                "arguments": [
+                  "Other"
+                ],
+                "type": "has_all_words",
+                "uuid": "71073ad0-e839-47d2-b7cc-c2b647816028",
+                "category_uuid": "4b3799b1-9067-4cec-b817-5386dcf4f874"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "80b4ccd5-ac57-4518-916f-afbbe9221e67",
+                "name": "Safety",
+                "exit_uuid": "d8862896-8434-40fc-8c2a-4f11b2bbc1ae"
+              },
+              {
+                "uuid": "5b9ae6a8-98c8-43a8-8d24-12070268bd25",
+                "name": "Efficacy",
+                "exit_uuid": "1027b5d4-ebce-44b1-af3d-9534b2d967ce"
+              },
+              {
+                "uuid": "476c33fd-37c8-4d96-a4e0-81b3c31ff5c9",
+                "name": "Side Effects",
+                "exit_uuid": "3d3fe8aa-9498-4152-ba0c-1a6ee4425de0"
+              },
+              {
+                "uuid": "10ace8c6-6623-48a1-a87f-7809115d09d9",
+                "name": "Religious",
+                "exit_uuid": "634644ac-7e9a-42bb-bb14-6e74bac6eea0"
+              },
+              {
+                "uuid": "92d31b31-873d-4eaf-a126-d7e584453541",
+                "name": "Access",
+                "exit_uuid": "ba9ad99f-00d5-405f-9148-b8cc9979f456"
+              },
+              {
+                "uuid": "4b3799b1-9067-4cec-b817-5386dcf4f874",
+                "name": "Alternative",
+                "exit_uuid": "07496b7e-2a8f-4cb8-92b6-79a11920cbb3"
+              },
+              {
+                "uuid": "eae81047-797c-4e0e-85c1-5cc3c39dd2b1",
+                "name": "Other",
+                "exit_uuid": "7209c477-553e-48d1-aca1-e7ac4712ecf4"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Vaccine Hesitancy"
+          },
+          "exits": [
+            {
+              "uuid": "d8862896-8434-40fc-8c2a-4f11b2bbc1ae",
+              "destination_uuid": "85430867-5d7d-4d87-a072-b5239671a8ed"
+            },
+            {
+              "uuid": "1027b5d4-ebce-44b1-af3d-9534b2d967ce",
+              "destination_uuid": "85430867-5d7d-4d87-a072-b5239671a8ed"
+            },
+            {
+              "uuid": "3d3fe8aa-9498-4152-ba0c-1a6ee4425de0",
+              "destination_uuid": "85430867-5d7d-4d87-a072-b5239671a8ed"
+            },
+            {
+              "uuid": "634644ac-7e9a-42bb-bb14-6e74bac6eea0",
+              "destination_uuid": "85430867-5d7d-4d87-a072-b5239671a8ed"
+            },
+            {
+              "uuid": "ba9ad99f-00d5-405f-9148-b8cc9979f456",
+              "destination_uuid": "85430867-5d7d-4d87-a072-b5239671a8ed"
+            },
+            {
+              "uuid": "07496b7e-2a8f-4cb8-92b6-79a11920cbb3",
+              "destination_uuid": "562e9f5e-436e-457d-9428-5dc503ca53e6"
+            },
+            {
+              "uuid": "7209c477-553e-48d1-aca1-e7ac4712ecf4",
+              "destination_uuid": "562e9f5e-436e-457d-9428-5dc503ca53e6"
+            }
+          ]
+        },
+        {
+          "uuid": "b6b56b1e-ed19-410a-9cbd-1a0bdbbebbc6",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "1c8e8510-d8f0-41c9-82dd-020bbdb7c6d9",
+            "cases": [
+              {
+                "arguments": [
+                  "yes"
+                ],
+                "type": "has_any_word",
+                "uuid": "95425a45-657b-45f1-b4a6-9f9ab2d530ab",
+                "category_uuid": "9dba9f47-6f0c-43e0-b420-6338c126ad72"
+              },
+              {
+                "arguments": [
+                  "maybe"
+                ],
+                "type": "has_any_word",
+                "uuid": "5ca256ad-655c-43de-ac0f-1217d4ca13eb",
+                "category_uuid": "d29bded2-3a0e-4430-90c9-5ed9f8e4570e"
+              },
+              {
+                "arguments": [
+                  "no"
+                ],
+                "type": "has_any_word",
+                "uuid": "82d38645-83da-48dd-adb2-fa414f4c1777",
+                "category_uuid": "ac3c9541-fefb-4dba-b55b-1c2122187944"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "9dba9f47-6f0c-43e0-b420-6338c126ad72",
+                "name": "Yes",
+                "exit_uuid": "c5b5b385-df7d-4a30-a52f-f3a3891f21a8"
+              },
+              {
+                "uuid": "d29bded2-3a0e-4430-90c9-5ed9f8e4570e",
+                "name": "Maybe",
+                "exit_uuid": "4c0a5210-911f-4371-9aee-3906cee509d8"
+              },
+              {
+                "uuid": "ac3c9541-fefb-4dba-b55b-1c2122187944",
+                "name": "No",
+                "exit_uuid": "da2a68ef-fdf6-4aae-a823-6c45c62b9435"
+              },
+              {
+                "uuid": "1c8e8510-d8f0-41c9-82dd-020bbdb7c6d9",
+                "name": "Other",
+                "exit_uuid": "e7f206b6-9d37-4f51-9a23-e6080ade4635"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Recommendation"
+          },
+          "exits": [
+            {
+              "uuid": "c5b5b385-df7d-4a30-a52f-f3a3891f21a8",
+              "destination_uuid": "0016a0e7-22c8-4008-ac97-a89c055b4315"
+            },
+            {
+              "uuid": "4c0a5210-911f-4371-9aee-3906cee509d8",
+              "destination_uuid": "009ec672-f3aa-4330-a215-d454d4c3448a"
+            },
+            {
+              "uuid": "da2a68ef-fdf6-4aae-a823-6c45c62b9435",
+              "destination_uuid": "009ec672-f3aa-4330-a215-d454d4c3448a"
+            },
+            {
+              "uuid": "e7f206b6-9d37-4f51-9a23-e6080ade4635",
+              "destination_uuid": "15f02477-85b2-43c1-a9ab-097578e7e882"
+            }
+          ]
+        },
+        {
+          "uuid": "562e9f5e-436e-457d-9428-5dc503ca53e6",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "Could you tell us in your *own words* why you feel this way about getting vaccinated (Go ahead and type)",
+              "type": "send_msg",
+              "quick_replies": [],
+              "uuid": "8319230d-9fc3-4185-be00-59d6e1d9158c"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "9fd3eb30-9903-4b1c-9f8e-72434ca4acc2",
+              "destination_uuid": "25788ad9-cb7b-481d-b622-e9f34a937848"
+            }
+          ]
+        },
+        {
+          "uuid": "009ec672-f3aa-4330-a215-d454d4c3448a",
+          "actions": [
+            {
+              "uuid": "ceee9ab1-25e3-448c-b85f-5ff8601755a8",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Vaccine Recommentation",
+                "key": "vaccine_recommentation"
+              },
+              "value": "@results.recommendation.category"
+            },
+            {
+              "attachments": [],
+              "text": "Could you tell us in your *own words* why you feel this way about encouraging others to get vaccinated? (Go ahead and type)",
+              "type": "send_msg",
+              "quick_replies": [],
+              "uuid": "438751aa-2964-494e-b6b8-b4850fae4b5c"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "3b587ab8-bcdf-4d8d-a564-3073f17f4e04",
+              "destination_uuid": "7e11a641-1fe5-42ba-b1d8-472be79f184e"
+            }
+          ]
+        },
+        {
+          "uuid": "0016a0e7-22c8-4008-ac97-a89c055b4315",
+          "actions": [
+            {
+              "uuid": "1308749f-7a54-4a29-8ff5-fc3777d60b9c",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Vaccine Recommentation",
+                "key": "vaccine_recommentation"
+              },
+              "value": "@results.recommendation.category"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "b43fa1f4-08d0-409e-a19d-d2cb0a3712b2",
+              "destination_uuid": "f0f02674-908b-40f2-af4e-5eaa897eca3a"
+            }
+          ]
+        },
+        {
+          "uuid": "7e11a641-1fe5-42ba-b1d8-472be79f184e",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "73d2f444-0d8c-4f39-8366-d64d0f41a6c6",
+            "cases": [],
+            "categories": [
+              {
+                "uuid": "73d2f444-0d8c-4f39-8366-d64d0f41a6c6",
+                "name": "All Responses",
+                "exit_uuid": "78f5b005-4dae-414e-ad2f-6308fe8d861f"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Recommendation unstructured"
+          },
+          "exits": [
+            {
+              "uuid": "78f5b005-4dae-414e-ad2f-6308fe8d861f",
+              "destination_uuid": "f0f02674-908b-40f2-af4e-5eaa897eca3a"
+            }
+          ]
+        },
+        {
+          "uuid": "25788ad9-cb7b-481d-b622-e9f34a937848",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "fba1a901-6beb-4776-9837-d748eb7228bb",
+            "cases": [],
+            "categories": [
+              {
+                "uuid": "fba1a901-6beb-4776-9837-d748eb7228bb",
+                "name": "All Responses",
+                "exit_uuid": "81d2294e-8d9a-441e-a7ef-579528879ab7"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Vaccine Hesitancy Unstructured"
+          },
+          "exits": [
+            {
+              "uuid": "81d2294e-8d9a-441e-a7ef-579528879ab7",
+              "destination_uuid": "f0f02674-908b-40f2-af4e-5eaa897eca3a"
+            }
+          ]
+        },
+        {
+          "uuid": "f0f02674-908b-40f2-af4e-5eaa897eca3a",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "Thank you for telling us what you think about getting vaccinated. Please tell us a little more about yourself:\n\n*How old are you?*",
+              "type": "send_msg",
+              "quick_replies": [
+                "<18",
+                "18-29",
+                "30-39",
+                "40-49",
+                ">50"
+              ],
+              "uuid": "d39168d0-2a2c-48c9-9dc5-7bbf040db89d"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "f94d6d76-3e58-4397-af44-a1ef9ba698a3",
+              "destination_uuid": "58d7a010-0073-489a-9a20-8f1d607aec31"
+            }
+          ]
+        },
+        {
+          "uuid": "85430867-5d7d-4d87-a072-b5239671a8ed",
+          "actions": [
+            {
+              "uuid": "7e54912f-fb07-453a-9fff-5d01c56cf479",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Vaccine Hesitancy Reason",
+                "key": "vaccine_hesitancy_reason"
+              },
+              "value": "@results.vaccine_hesitancy.category"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "225b1d64-a690-467e-83ca-8c441aece402",
+              "destination_uuid": "f0f02674-908b-40f2-af4e-5eaa897eca3a"
+            }
+          ]
+        },
+        {
+          "uuid": "58d7a010-0073-489a-9a20-8f1d607aec31",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "ae280e4a-29c3-4521-af2f-a92c9703b6af",
+            "cases": [
+              {
+                "arguments": [
+                  "<18"
+                ],
+                "type": "has_all_words",
+                "uuid": "9b9843ab-7698-44d4-8e2a-25198663281f",
+                "category_uuid": "28384db5-eb91-4c21-935c-a55491b20db0"
+              },
+              {
+                "arguments": [
+                  "18-29"
+                ],
+                "type": "has_all_words",
+                "uuid": "867f9929-ac08-4817-ad0f-b063c8b1a790",
+                "category_uuid": "9c6bbfd1-9fd4-484c-b0f0-2ee232b77158"
+              },
+              {
+                "arguments": [
+                  "30-39"
+                ],
+                "type": "has_all_words",
+                "uuid": "81201571-3d0f-4dd0-94cc-9d474a40d90e",
+                "category_uuid": "d5f560c6-534d-40cc-913e-7f44601e4deb"
+              },
+              {
+                "arguments": [
+                  "40-49"
+                ],
+                "type": "has_all_words",
+                "uuid": "c09dfedf-773d-44a1-95eb-f9038bac571c",
+                "category_uuid": "318c2276-bb0a-4a12-a3ad-b4e295b5edfe"
+              },
+              {
+                "arguments": [
+                  ">50"
+                ],
+                "type": "has_all_words",
+                "uuid": "82c5a132-d3ce-43e0-9c90-180bbeb1a191",
+                "category_uuid": "7facdb20-5407-469c-8fa6-da2d901c17bb"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "28384db5-eb91-4c21-935c-a55491b20db0",
+                "name": "<18",
+                "exit_uuid": "8bfab0d7-f23b-480f-aaa1-c687b7629bc5"
+              },
+              {
+                "uuid": "9c6bbfd1-9fd4-484c-b0f0-2ee232b77158",
+                "name": "18-29",
+                "exit_uuid": "162d3bbb-b304-4f39-a3c0-0932969ff882"
+              },
+              {
+                "uuid": "d5f560c6-534d-40cc-913e-7f44601e4deb",
+                "name": "30-39",
+                "exit_uuid": "063b5b29-e19b-4d71-b06b-92bbe8b32dfd"
+              },
+              {
+                "uuid": "318c2276-bb0a-4a12-a3ad-b4e295b5edfe",
+                "name": "40-49",
+                "exit_uuid": "5374158e-b9d0-4fa2-ae87-8f4cf8c0c9b8"
+              },
+              {
+                "uuid": "7facdb20-5407-469c-8fa6-da2d901c17bb",
+                "name": ">50",
+                "exit_uuid": "f7cda625-53da-4906-88aa-3db47a7b7b11"
+              },
+              {
+                "uuid": "ae280e4a-29c3-4521-af2f-a92c9703b6af",
+                "name": "Other",
+                "exit_uuid": "6cc17ea8-0bf9-47ea-a509-a870af0ae738"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Age category"
+          },
+          "exits": [
+            {
+              "uuid": "8bfab0d7-f23b-480f-aaa1-c687b7629bc5",
+              "destination_uuid": "5815e892-37b8-428f-b78c-b39150c03a61"
+            },
+            {
+              "uuid": "162d3bbb-b304-4f39-a3c0-0932969ff882",
+              "destination_uuid": "5815e892-37b8-428f-b78c-b39150c03a61"
+            },
+            {
+              "uuid": "063b5b29-e19b-4d71-b06b-92bbe8b32dfd",
+              "destination_uuid": "5815e892-37b8-428f-b78c-b39150c03a61"
+            },
+            {
+              "uuid": "5374158e-b9d0-4fa2-ae87-8f4cf8c0c9b8",
+              "destination_uuid": "5815e892-37b8-428f-b78c-b39150c03a61"
+            },
+            {
+              "uuid": "f7cda625-53da-4906-88aa-3db47a7b7b11",
+              "destination_uuid": "5815e892-37b8-428f-b78c-b39150c03a61"
+            },
+            {
+              "uuid": "6cc17ea8-0bf9-47ea-a509-a870af0ae738",
+              "destination_uuid": "82f1af68-395c-434d-8d3c-fcc67ab1a221"
+            }
+          ]
+        },
+        {
+          "uuid": "82f1af68-395c-434d-8d3c-fcc67ab1a221",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "\u26a0\ufe0f This service works best when you use the buttons at the bottom of the message\n\n*How old are you?*",
+              "type": "send_msg",
+              "quick_replies": [
+                "<18",
+                "18-29",
+                "30-39",
+                "40-49",
+                ">50"
+              ],
+              "uuid": "319ca887-fd0e-457c-aaee-fa5b74aceed5"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "954d7a2d-cd75-4809-b69d-78c9074e1832",
+              "destination_uuid": "58d7a010-0073-489a-9a20-8f1d607aec31"
+            }
+          ]
+        },
+        {
+          "uuid": "5815e892-37b8-428f-b78c-b39150c03a61",
+          "actions": [
+            {
+              "uuid": "f90dc385-4195-445c-a2db-1a12cd256cf1",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Age Category",
+                "key": "age_category"
+              },
+              "value": "@results.age_category.category"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "120c7f0d-36a4-4ac9-afa7-099456a8aac8",
+              "destination_uuid": "c396629a-1ce6-4b12-8212-67ec70568793"
+            }
+          ]
+        },
+        {
+          "uuid": "4bbe5aa4-f443-4002-9903-1915b3bfd59b",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "\u26a0\ufe0f This service works best when you use the buttons at the bottom of the message\n\n*What is your GENDER?*",
+              "type": "send_msg",
+              "quick_replies": [],
+              "uuid": "cce91e94-0de0-4cba-a099-26d87d3f7d7c"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "cf1c63c2-48b7-4d1b-aa33-9a8bd2b04512",
+              "destination_uuid": "9701e55a-02d3-48c6-a7bc-577e66ba0737"
+            }
+          ]
+        },
+        {
+          "uuid": "c396629a-1ce6-4b12-8212-67ec70568793",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "*What is your GENDER?*",
+              "type": "send_msg",
+              "all_urns": false,
+              "quick_replies": [
+                "Male",
+                "Female",
+                "Other"
+              ],
+              "uuid": "d52ff0f0-0e7d-4676-992a-acfe4b67b0a0"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "16e942ed-83d2-45ab-b861-94bffebc63e6",
+              "destination_uuid": "9701e55a-02d3-48c6-a7bc-577e66ba0737"
+            }
+          ]
+        },
+        {
+          "uuid": "9701e55a-02d3-48c6-a7bc-577e66ba0737",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "5dd4868c-8307-45fd-aa38-aa1c78038f9c",
+            "cases": [
+              {
+                "arguments": [
+                  "male"
+                ],
+                "type": "has_any_word",
+                "uuid": "1573ebf3-f2ea-45db-ba42-3cab3d4f7047",
+                "category_uuid": "f7d36836-3e1e-4153-bef0-9ffb2f1136f7"
+              },
+              {
+                "arguments": [
+                  "female"
+                ],
+                "type": "has_any_word",
+                "uuid": "c6754e63-7dc3-42a0-b887-f6c6a5584f94",
+                "category_uuid": "58191b67-cd62-4248-8ec5-6f9a47c4e048"
+              },
+              {
+                "arguments": [
+                  "other"
+                ],
+                "type": "has_any_word",
+                "uuid": "cc8997d3-317f-4a74-a328-b83a67e82c5c",
+                "category_uuid": "41674c9c-f39d-4894-8fc7-b0eb75d821c9"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "f7d36836-3e1e-4153-bef0-9ffb2f1136f7",
+                "name": "Male",
+                "exit_uuid": "b3ec567a-bf56-44ba-a6e5-ff0213247747"
+              },
+              {
+                "uuid": "58191b67-cd62-4248-8ec5-6f9a47c4e048",
+                "name": "Female",
+                "exit_uuid": "c02b639d-29da-470e-b49f-d43d8b09fa4c"
+              },
+              {
+                "uuid": "41674c9c-f39d-4894-8fc7-b0eb75d821c9",
+                "name": "Other",
+                "exit_uuid": "bb56edbc-f73f-448f-a9a0-c829982f612d"
+              },
+              {
+                "uuid": "5dd4868c-8307-45fd-aa38-aa1c78038f9c",
+                "name": "Other",
+                "exit_uuid": "7423e3eb-fbb7-4207-bcae-e41e2c9a6383"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Gender"
+          },
+          "exits": [
+            {
+              "uuid": "b3ec567a-bf56-44ba-a6e5-ff0213247747",
+              "destination_uuid": "fd79189f-61d4-4a3d-a451-448055e7cf5e"
+            },
+            {
+              "uuid": "c02b639d-29da-470e-b49f-d43d8b09fa4c",
+              "destination_uuid": "fd79189f-61d4-4a3d-a451-448055e7cf5e"
+            },
+            {
+              "uuid": "bb56edbc-f73f-448f-a9a0-c829982f612d",
+              "destination_uuid": "fd79189f-61d4-4a3d-a451-448055e7cf5e"
+            },
+            {
+              "uuid": "7423e3eb-fbb7-4207-bcae-e41e2c9a6383",
+              "destination_uuid": "4bbe5aa4-f443-4002-9903-1915b3bfd59b"
+            }
+          ]
+        },
+        {
+          "uuid": "fd79189f-61d4-4a3d-a451-448055e7cf5e",
+          "actions": [
+            {
+              "uuid": "9ee809a0-7fc7-422b-9bf7-99a6d27674a5",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Gender",
+                "key": "gender"
+              },
+              "value": "@results.gender.category"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "f5232d43-82d7-41e9-9cc3-5c11de5827f1",
+              "destination_uuid": "02722aeb-70e8-46cb-84f9-bb78c20923aa"
+            }
+          ]
+        },
+        {
+          "uuid": "02722aeb-70e8-46cb-84f9-bb78c20923aa",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "*Which PROVINCE do you live in?*",
+              "type": "send_msg",
+              "all_urns": false,
+              "quick_replies": [
+                "Eastern Cape",
+                "Free State",
+                "Gauteng",
+                " Kwazulu-Natal",
+                "Limpopo",
+                "Mpumalanga",
+                "North West",
+                "Northern Cape",
+                "Western Cape"
+              ],
+              "uuid": "375ae275-0fc1-4a5e-8ad3-4858a8f14097"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "56d3f230-2ea5-4295-a9f7-bf0643775d48",
+              "destination_uuid": "bd6f2142-5ba5-4dfb-9102-2cc61a1e4059"
+            }
+          ]
+        },
+        {
+          "uuid": "bc0774a8-e14f-417a-a115-98f35d710acb",
+          "actions": [
+            {
+              "attachments": [],
+              "text": "\u26a0\ufe0f This service works best when you use the buttons at the bottom of the message\n\n*Which PROVINCE do you live in?*",
+              "type": "send_msg",
+              "quick_replies": [],
+              "uuid": "7276724f-2dc3-4084-9142-61f5399c652f"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "78c34269-8e27-4126-8442-58e4a775e330",
+              "destination_uuid": "bd6f2142-5ba5-4dfb-9102-2cc61a1e4059"
+            }
+          ]
+        },
+        {
+          "uuid": "bd6f2142-5ba5-4dfb-9102-2cc61a1e4059",
+          "actions": [],
+          "router": {
+            "type": "switch",
+            "default_category_uuid": "3cc4635c-4229-4e5a-85d7-7e5dccfe77d5",
+            "cases": [
+              {
+                "arguments": [
+                  "Eastern Cape"
+                ],
+                "type": "has_all_words",
+                "uuid": "0e764203-eeec-4587-b1a1-9022ab25b71e",
+                "category_uuid": "7bdf492c-1a63-4872-92e4-f8f0444d2e00"
+              },
+              {
+                "arguments": [
+                  "Free State"
+                ],
+                "type": "has_all_words",
+                "uuid": "e45f1aab-0bce-4896-a3e8-4727aac0c00f",
+                "category_uuid": "0be4b423-466c-4b2d-9af9-0239d23b3414"
+              },
+              {
+                "arguments": [
+                  "Gauteng"
+                ],
+                "type": "has_all_words",
+                "uuid": "d48704ef-6c75-4716-94a9-4eeabd02dd74",
+                "category_uuid": "9908bcdf-6022-4ee9-a94e-75fa1d24e7db"
+              },
+              {
+                "arguments": [
+                  "Kwazulu-Natal"
+                ],
+                "type": "has_all_words",
+                "uuid": "e6359ea9-ee2c-4269-b845-f14c662234e4",
+                "category_uuid": "d71859ac-72d3-41bb-8422-15a4a8fd45d2"
+              },
+              {
+                "arguments": [
+                  "Limpopo"
+                ],
+                "type": "has_all_words",
+                "uuid": "1fb6b99a-9720-497c-9d32-770dcd17abb1",
+                "category_uuid": "5cfd4dba-334e-42f2-9e6b-a3f8a1d4d16c"
+              },
+              {
+                "arguments": [
+                  "Mpumalanga"
+                ],
+                "type": "has_all_words",
+                "uuid": "0925da8a-a130-49f8-8908-3c09a347f9c5",
+                "category_uuid": "689c1496-c1b5-42cc-8af0-1577267037ad"
+              },
+              {
+                "arguments": [
+                  "North West"
+                ],
+                "type": "has_all_words",
+                "uuid": "7f38e887-4b25-4322-a659-546d5bf7e84c",
+                "category_uuid": "82b2f543-9b72-4455-aee6-76c91a045025"
+              },
+              {
+                "arguments": [
+                  "Northern Cape"
+                ],
+                "type": "has_all_words",
+                "uuid": "27d5c237-fc40-4f71-8a53-fc8da97f345f",
+                "category_uuid": "5371e651-71a0-45fc-9722-8e877ebb250e"
+              },
+              {
+                "arguments": [
+                  "Western Cape"
+                ],
+                "type": "has_all_words",
+                "uuid": "5692ed7d-15ee-4e24-8e31-707e899d3a7b",
+                "category_uuid": "766e87ce-2d58-43a1-b4c9-717bf1646998"
+              }
+            ],
+            "categories": [
+              {
+                "uuid": "7bdf492c-1a63-4872-92e4-f8f0444d2e00",
+                "name": "Eastern Cape",
+                "exit_uuid": "0626cd76-1536-4660-a878-68448ef0bf23"
+              },
+              {
+                "uuid": "0be4b423-466c-4b2d-9af9-0239d23b3414",
+                "name": "Free State",
+                "exit_uuid": "88e347eb-e346-463c-a8bf-40084afef606"
+              },
+              {
+                "uuid": "9908bcdf-6022-4ee9-a94e-75fa1d24e7db",
+                "name": "Gauteng",
+                "exit_uuid": "4b34d11a-fdfb-4768-a74a-a4edfcab63f3"
+              },
+              {
+                "uuid": "d71859ac-72d3-41bb-8422-15a4a8fd45d2",
+                "name": "Kwazulu-Natal",
+                "exit_uuid": "d23ff3d8-64f5-44fb-9b02-66b495690754"
+              },
+              {
+                "uuid": "5cfd4dba-334e-42f2-9e6b-a3f8a1d4d16c",
+                "name": "Limpopo",
+                "exit_uuid": "4f4b0090-a3ac-493a-b7c8-d174ff43e29c"
+              },
+              {
+                "uuid": "689c1496-c1b5-42cc-8af0-1577267037ad",
+                "name": "Mpumalanga",
+                "exit_uuid": "2e32bcb3-486f-4930-b9f0-6e200247c250"
+              },
+              {
+                "uuid": "82b2f543-9b72-4455-aee6-76c91a045025",
+                "name": "North West",
+                "exit_uuid": "bd855cce-98e4-4e96-9da6-c075dc1ac940"
+              },
+              {
+                "uuid": "5371e651-71a0-45fc-9722-8e877ebb250e",
+                "name": "Northern Cape",
+                "exit_uuid": "3be8b963-4ae9-4767-ab28-0669cfab5990"
+              },
+              {
+                "uuid": "766e87ce-2d58-43a1-b4c9-717bf1646998",
+                "name": "Western Cape",
+                "exit_uuid": "f918ee19-322e-4c02-89c6-3545bff37ca7"
+              },
+              {
+                "uuid": "3cc4635c-4229-4e5a-85d7-7e5dccfe77d5",
+                "name": "Other",
+                "exit_uuid": "b9107c90-2814-4129-ba48-160df07850f4"
+              }
+            ],
+            "operand": "@input.text",
+            "wait": {
+              "type": "msg"
+            },
+            "result_name": "Province"
+          },
+          "exits": [
+            {
+              "uuid": "0626cd76-1536-4660-a878-68448ef0bf23",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "88e347eb-e346-463c-a8bf-40084afef606",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "4b34d11a-fdfb-4768-a74a-a4edfcab63f3",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "d23ff3d8-64f5-44fb-9b02-66b495690754",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "4f4b0090-a3ac-493a-b7c8-d174ff43e29c",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "2e32bcb3-486f-4930-b9f0-6e200247c250",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "bd855cce-98e4-4e96-9da6-c075dc1ac940",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "3be8b963-4ae9-4767-ab28-0669cfab5990",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "f918ee19-322e-4c02-89c6-3545bff37ca7",
+              "destination_uuid": "f39f9666-3357-40b8-9282-3900325fdfb4"
+            },
+            {
+              "uuid": "b9107c90-2814-4129-ba48-160df07850f4",
+              "destination_uuid": "bc0774a8-e14f-417a-a115-98f35d710acb"
+            }
+          ]
+        },
+        {
+          "uuid": "f39f9666-3357-40b8-9282-3900325fdfb4",
+          "actions": [
+            {
+              "uuid": "d1b0f05b-b50e-4a03-8157-633594579bf0",
+              "type": "set_contact_field",
+              "field": {
+                "name": "Province",
+                "key": "province"
+              },
+              "value": "@results.province.category"
+            },
+            {
+              "attachments": [],
+              "text": "Thank you for completing our poll\n\nReply:\n\ud83d\udc89 *VACCINE* for more on vaccines\n\ud83d\udccc *0* for the main *MENU*",
+              "type": "send_msg",
+              "quick_replies": [],
+              "uuid": "3cc8d968-2d3f-4476-ac07-557cac500b6d"
+            },
+            {
+              "type": "add_contact_groups",
+              "groups": [
+                {
+                  "uuid": "40eb6fb1-37be-4bc6-8f3f-c665b88e0aa4",
+                  "name": "Vaccine Acceptance Poll - Completed",
+                  "query": null,
+                  "status": "ready",
+                  "count": 0
+                }
+              ],
+              "uuid": "85995cce-44b8-4130-ab1d-d1c5d8a37a86"
+            }
+          ],
+          "exits": [
+            {
+              "uuid": "add418b6-b815-4bff-942c-1a30d7bc5b42",
+              "destination_uuid": null
+            }
+          ]
+        }
+      ],
+      "_ui": {
+        "nodes": {
+          "8127bb8f-1745-45c3-84bc-8f6ed8610da9": {
+            "position": {
+              "left": 780,
+              "top": 0
+            },
+            "type": "execute_actions"
+          },
+          "c6d11b48-58e3-4df4-bd6f-595802bed413": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 680,
+              "top": 360
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "8157e277-3e3b-4432-9fea-659e2b8b4ae1": {
+            "position": {
+              "left": 1220,
+              "top": 240
+            },
+            "type": "execute_actions"
+          },
+          "29eb90ca-3b4b-4006-a15b-5080d177394f": {
+            "position": {
+              "left": 40,
+              "top": 540
+            },
+            "type": "execute_actions"
+          },
+          "77354de2-9dac-4513-858b-ebbd68bf78e3": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 20,
+              "top": 840
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "34a0a302-6b95-405d-8139-4c79eb8e2d5d": {
+            "position": {
+              "left": 500,
+              "top": 720
+            },
+            "type": "execute_actions"
+          },
+          "132e1f36-cad9-4e25-9bed-eeb24b00c594": {
+            "position": {
+              "left": 440,
+              "top": 580
+            },
+            "type": "execute_actions"
+          },
+          "0cd9dd0a-d578-42e5-af50-9d7a25a14f4c": {
+            "type": "split_by_contact_field",
+            "position": {
+              "left": 20,
+              "top": 1100
+            },
+            "config": {
+              "operand": {
+                "id": "self_reported_vaccinated",
+                "name": "Self reported vaccinated",
+                "type": "field"
+              },
+              "cases": {}
+            }
+          },
+          "92501eaf-8121-455c-bae1-af816d78fb01": {
+            "position": {
+              "left": 280,
+              "top": 1140
+            },
+            "type": "execute_actions"
+          },
+          "b6b56b1e-ed19-410a-9cbd-1a0bdbbebbc6": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 260,
+              "top": 1400
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "15f02477-85b2-43c1-a9ab-097578e7e882": {
+            "position": {
+              "left": 540,
+              "top": 1180
+            },
+            "type": "execute_actions"
+          },
+          "009ec672-f3aa-4330-a215-d454d4c3448a": {
+            "position": {
+              "left": 520,
+              "top": 1580
+            },
+            "type": "execute_actions"
+          },
+          "7e11a641-1fe5-42ba-b1d8-472be79f184e": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 500,
+              "top": 1840
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "f0f02674-908b-40f2-af4e-5eaa897eca3a": {
+            "position": {
+              "left": 40,
+              "top": 1940
+            },
+            "type": "execute_actions"
+          },
+          "58d7a010-0073-489a-9a20-8f1d607aec31": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 20,
+              "top": 2200
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "5815e892-37b8-428f-b78c-b39150c03a61": {
+            "position": {
+              "left": 60,
+              "top": 2340
+            },
+            "type": "execute_actions"
+          },
+          "82f1af68-395c-434d-8d3c-fcc67ab1a221": {
+            "position": {
+              "left": 460,
+              "top": 2200
+            },
+            "type": "execute_actions"
+          },
+          "c396629a-1ce6-4b12-8212-67ec70568793": {
+            "position": {
+              "left": 60,
+              "top": 2440
+            },
+            "type": "execute_actions"
+          },
+          "9701e55a-02d3-48c6-a7bc-577e66ba0737": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 40,
+              "top": 2580
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "fd79189f-61d4-4a3d-a451-448055e7cf5e": {
+            "position": {
+              "left": 40,
+              "top": 2720
+            },
+            "type": "execute_actions"
+          },
+          "4bbe5aa4-f443-4002-9903-1915b3bfd59b": {
+            "position": {
+              "left": 400,
+              "top": 2420
+            },
+            "type": "execute_actions"
+          },
+          "02722aeb-70e8-46cb-84f9-bb78c20923aa": {
+            "position": {
+              "left": 40,
+              "top": 2840
+            },
+            "type": "execute_actions"
+          },
+          "bd6f2142-5ba5-4dfb-9102-2cc61a1e4059": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 20,
+              "top": 3100
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "f39f9666-3357-40b8-9282-3900325fdfb4": {
+            "position": {
+              "left": 260,
+              "top": 3300
+            },
+            "type": "execute_actions"
+          },
+          "bc0774a8-e14f-417a-a115-98f35d710acb": {
+            "position": {
+              "left": 1040,
+              "top": 2960
+            },
+            "type": "execute_actions"
+          },
+          "98d904a1-1e92-4500-8e67-1b2a12054e5f": {
+            "position": {
+              "left": 820,
+              "top": 700
+            },
+            "type": "execute_actions"
+          },
+          "3563fd16-208c-45bc-ae43-cd6f6b4ae1a6": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 780,
+              "top": 1260
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "85430867-5d7d-4d87-a072-b5239671a8ed": {
+            "position": {
+              "left": 780,
+              "top": 1940
+            },
+            "type": "execute_actions"
+          },
+          "562e9f5e-436e-457d-9428-5dc503ca53e6": {
+            "position": {
+              "left": 1160,
+              "top": 1460
+            },
+            "type": "execute_actions"
+          },
+          "25788ad9-cb7b-481d-b622-e9f34a937848": {
+            "type": "wait_for_response",
+            "position": {
+              "left": 1140,
+              "top": 1920
+            },
+            "config": {
+              "cases": {}
+            }
+          },
+          "5167fcb8-4052-493c-946b-2b6407b2222b": {
+            "position": {
+              "left": 60,
+              "top": 1000
+            },
+            "type": "execute_actions"
+          },
+          "0016a0e7-22c8-4008-ac97-a89c055b4315": {
+            "position": {
+              "left": 240,
+              "top": 1600
+            },
+            "type": "execute_actions"
+          }
+        }
+      },
+      "revision": 153,
+      "expire_after_minutes": 10080,
+      "localization": {}
+    }
+  ],
+  "campaigns": [],
+  "triggers": [
+    {
+      "trigger_type": "K",
+      "flow": {
+        "uuid": "a73a256e-ba33-4b68-ac33-c5a260a591a9",
+        "name": "Vaccine Acceptance Poll"
+      },
+      "groups": [],
+      "exclude_groups": [],
+      "keyword": "poll"
+    }
+  ],
+  "fields": [
+    {
+      "key": "age_category",
+      "name": "Age Category",
+      "type": "text"
+    },
+    {
+      "key": "gender",
+      "name": "Gender",
+      "type": "text"
+    },
+    {
+      "key": "province",
+      "name": "Province",
+      "type": "text"
+    },
+    {
+      "key": "self_reported_vaccinated",
+      "name": "Self reported vaccinated",
+      "type": "text"
+    },
+    {
+      "key": "vaccine_hesitancy_reason",
+      "name": "Vaccine Hesitancy Reason",
+      "type": "text"
+    },
+    {
+      "key": "vaccine_motivation",
+      "name": "Vaccine motivation",
+      "type": "text"
+    },
+    {
+      "key": "vaccine_recommentation",
+      "name": "Vaccine Recommentation",
+      "type": "text"
+    },
+    {
+      "key": "vaccine_willingness",
+      "name": "Vaccine Willingness",
+      "type": "text"
+    }
+  ],
+  "groups": [
+    {
+      "uuid": "40eb6fb1-37be-4bc6-8f3f-c665b88e0aa4",
+      "name": "Vaccine Acceptance Poll - Completed",
+      "query": null
+    }
+  ]
+}
