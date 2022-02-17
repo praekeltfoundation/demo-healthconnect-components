@@ -48,3 +48,7 @@ flowchart TD
   E0 -- Yes --> MR
   E0 -- No --> LR[Low risk]
 ```
+
+## Changelog
+### 2022/02/17
+- First version of the flow
